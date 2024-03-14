@@ -1,4 +1,4 @@
-StateManager = require("state")
+StateManager = require("statemanager")
 
 function love.load()
 	StateManager:addState("mainmenu")

@@ -1,6 +1,4 @@
-local Game = {x = 0, y = 200, text = "Game, press space to switch scene", dir = 1, speed = 200}
-local StateManager = require("state")
-
+local Game = { x = 0, y = 200, text = "Game, press space to switch scene", dir = 1, speed = 200 }
 local font = love.graphics.getFont()
 local WW, WH = love.graphics.getDimensions()
 
@@ -25,15 +23,8 @@ end
 
 function Game:keypressed(key, scancode, isrepeat)
 	if scancode == "space" then
-		StateManager:setState("test")
+		StateManager:setState("mainmenu")
 	end
-	if scancode == "l" then
-		StateManager:call("load")
-	end
-	if scancode == "d" then
-		StateManager:setState("animal.dog")
-	end
-
 end
 
 return Game

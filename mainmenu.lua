@@ -1,24 +1,27 @@
 local MainMenu = {}
 local Button = require("button")
 
-Button.new({x = 100, y = 100, text = "Load Game", state = "mainmenu", fn = function () State.setScene("game") end})
-Button.new({x = 100, y = 200, text = "button1", state = "mainmenu"})
-Button.new({x = 100, y = 300, text = "button2", state = "mainmenu"})
-Button.new({x = 100, y = 400, text = "button3", state = "mainmenu"})
-
-function MainMenu:load()
-end
+local Buttons = {
+	Button.new({ x = 100, y = 100, text = "Load Game", fn = function() StateManager:setState("game") end }),
+	Button.new({ x = 100, y = 200, text = "Load Test", fn = function() StateManager:setState("test") end })
+}
 
 function MainMenu:mousepressed(mx, my, mouseButton)
-	Button:mousepressed(mx, my, mouseButton)
+	for _, button in ipairs(Buttons) do
+		button:mousepressed(mx, my, mouseButton)
+	end
 end
 
 function MainMenu:draw()
-	Button:draw()
+	for _, button in ipairs(Buttons) do
+		button:draw()
+	end
 end
 
 function MainMenu:update(dt)
-	Button:update(dt)
+	for _, button in ipairs(Buttons) do
+		button:update(dt)
+	end
 end
 
 return MainMenu

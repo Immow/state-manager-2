@@ -11,7 +11,7 @@ function StateManager:setState(scene)
 end
 
 -- Gets the current state
-function StateManager:getScene()
+function StateManager:getState()
 	return self.activeState
 end
 

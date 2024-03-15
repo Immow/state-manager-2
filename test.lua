@@ -1,33 +1,36 @@
-local Test = { x = 0, y = 200, text = "Test, press space to switch scene", dir = 1, speed = 200 }
-local font = love.graphics.getFont()
-local WW, WH = love.graphics.getDimensions()
+local Test = {}
+local Button = require("button")
 
-function Test:load()
-	print("Test Loaded")
+local Buttons = {
+	Button.new({
+		x = 100,
+		y = 200,
+		text = "Load Test",
+		fn = function()
+			StateManager:execute("cow", "Mooooooooo")
+		end
+	})
+}
+
+function Test:cow(arg)
+	print(arg)
 end
 
-function Test:cow(...)
-	print(self.x)
+function Test:mousepressed(mx, my, mouseButton)
+	for _, button in ipairs(Buttons) do
+		button:mousepressed(mx, my, mouseButton)
+	end
 end
 
 function Test:draw()
-	love.graphics.print(self.text, self.x, self.y)
+	for _, button in ipairs(Buttons) do
+		button:draw()
+	end
 end
 
 function Test:update(dt)
-	if self.x + font:getWidth(self.text) > WW then
-		self.dir = -1
-		self.x = WW - font:getWidth(self.text)
-	elseif self.x < 0 then
-		self.dir = 1
-		self.x = 0
-	end
-	self.x = (self.x + (self.speed * self.dir) * dt)
-end
-
-function Test:keypressed(key, scancode, isrepeat)
-	if scancode == "space" then
-		StateManager:setState("mainmenu")
+	for _, button in ipairs(Buttons) do
+		button:update(dt)
 	end
 end
 

@@ -9,7 +9,6 @@ local Buttons = {
 		text = "Load Test",
 		fn = function()
 			StateManager:setState("test")
-			StateManager:execute("test", "cow", "Mooooooooo")
 		end
 	})
 }

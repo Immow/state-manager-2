@@ -28,13 +28,12 @@ function StateManager:addState(state)
 	table.insert(self.states, state)
 end
 
----Execute a function, self is passed as first argument.
----@param state any the state / module
+---Execute a function of current state/module, self is passed as first argument.
 ---@param method any name of the function you want to execute
 ---@param ... any arguments we want to pass
-function StateManager:execute(state, method, ...)
-	if self.modules[state][method] then
-		self.modules[state][method](self.modules[state], ...)
+function StateManager:execute(method, ...)
+	if self.modules[self.activeState] and self.modules[self.activeState][method] then
+		self.modules[self.activeState][method](self.modules[self.activeState], ...)
 	end
 end
 

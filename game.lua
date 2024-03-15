@@ -1,29 +1,35 @@
-local Game = { x = 0, y = 200, text = "Game, press space to switch scene", dir = 1, speed = 200 }
-local font = love.graphics.getFont()
-local WW, WH = love.graphics.getDimensions()
+local Game = {}
+local Button = require("button")
 
-function Game:load()
-	print("Game Loaded")
+local Buttons = {
+	Button.new({
+		x = 100,
+		y = 100,
+		text = "Main Menu",
+		fn = function()
+			StateManager:setState("mainmenu")
+		end
+	})
+}
+
+function Game:mousepressed(mx, my, mouseButton)
+	for _, button in ipairs(Buttons) do
+		button:mousepressed(mx, my, mouseButton)
+	end
 end
 
 function Game:draw()
-	love.graphics.print(self.text, self.x, self.y)
+	for _, button in ipairs(Buttons) do
+		button:draw()
+	end
+	love.graphics.setFont(StateFont)
+	love.graphics.print("Game File")
+	love.graphics.setFont(DefaultFont)
 end
 
 function Game:update(dt)
-	if self.x + font:getWidth(self.text) > WW then
-		self.dir = -1
-		self.x = WW - font:getWidth(self.text)
-	elseif self.x < 0 then
-		self.dir = 1
-		self.x = 0
-	end
-	self.x = (self.x + (self.speed * self.dir) * dt)
-end
-
-function Game:keypressed(key, scancode, isrepeat)
-	if scancode == "space" then
-		StateManager:setState("mainmenu")
+	for _, button in ipairs(Buttons) do
+		button:update(dt)
 	end
 end
 

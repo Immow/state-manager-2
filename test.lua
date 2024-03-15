@@ -4,10 +4,18 @@ local Button = require("button")
 local Buttons = {
 	Button.new({
 		x = 100,
-		y = 200,
-		text = "Load Test",
+		y = 100,
+		text = "Moo",
 		fn = function()
 			StateManager:execute("cow", "Mooooooooo")
+		end
+	}),
+	Button.new({
+		x = 100,
+		y = 200,
+		text = "Main Menu",
+		fn = function()
+			StateManager:setState("mainmenu")
 		end
 	})
 }
@@ -26,6 +34,9 @@ function Test:draw()
 	for _, button in ipairs(Buttons) do
 		button:draw()
 	end
+	love.graphics.setFont(StateFont)
+	love.graphics.print("Test File")
+	love.graphics.setFont(DefaultFont)
 end
 
 function Test:update(dt)

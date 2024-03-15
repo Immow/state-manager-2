@@ -1,4 +1,6 @@
 StateManager = require("statemanager")
+DefaultFont = love.graphics.getFont()
+StateFont = love.graphics.newFont(30)
 
 function love.load()
 	StateManager:addState("mainmenu")

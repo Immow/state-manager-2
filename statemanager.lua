@@ -31,7 +31,7 @@ end
 --- StateManager will require states/modules and call the load function if possible.
 function StateManager:load()
 	if #self.states == 0 then error("No states/modules present, use State:addState(\"state\") to add a state") end
-	if self.activeState == nil then error("State:setState(\"state\") not set") end
+	if not self.activeState then error("State:setState(\"state\") not set") end
 	for _, state in pairs(self.states) do
 		self.modules[state] = require(state)
 		if self.modules[state].load then

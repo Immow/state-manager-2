@@ -6,6 +6,10 @@ function Test:load()
 	print("Test Loaded")
 end
 
+function Test:cow(...)
+	print(self.x)
+end
+
 function Test:draw()
 	love.graphics.print(self.text, self.x, self.y)
 end

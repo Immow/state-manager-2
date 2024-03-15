@@ -28,6 +28,16 @@ function StateManager:addState(state)
 	table.insert(self.states, state)
 end
 
+---Execute a function, self is passed as first argument.
+---@param state any the state / module
+---@param method any name of the function you want to execute
+---@param ... any arguments we want to pass
+function StateManager:execute(state, method, ...)
+	if self.modules[state][method] then
+		self.modules[state][method](self.modules[state], ...)
+	end
+end
+
 --- StateManager will require states/modules and call the load function if possible.
 function StateManager:load()
 	if #self.states == 0 then error("No states/modules present, use State:addState(\"state\") to add a state") end

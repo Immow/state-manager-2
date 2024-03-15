@@ -3,7 +3,15 @@ local Button = require("button")
 
 local Buttons = {
 	Button.new({ x = 100, y = 100, text = "Load Game", fn = function() StateManager:setState("game") end }),
-	Button.new({ x = 100, y = 200, text = "Load Test", fn = function() StateManager:setState("test") end })
+	Button.new({
+		x = 100,
+		y = 200,
+		text = "Load Test",
+		fn = function()
+			StateManager:setState("test")
+			StateManager:execute("test", "cow", "Mooooooooo")
+		end
+	})
 }
 
 function MainMenu:mousepressed(mx, my, mouseButton)

@@ -10,19 +10,25 @@ function StateManager:setState(scene)
 	self.activeState = scene
 end
 
--- Gets the current state
+--- Returns current state
+---@return string
 function StateManager:getState()
 	return self.activeState
+end
+
+---Returns all the stored states
+---@return table
+function StateManager:getAllStates()
+	return self.states
 end
 
 -- Add a state to state manager
 ---@param state string
 function StateManager:addState(state)
-	print(state)
 	table.insert(self.states, state)
 end
 
--- StateManager will require states/modules and call the load function if possible.
+--- StateManager will require states/modules and call the load function if possible.
 function StateManager:load()
 	if #self.states == 0 then error("No states/modules present, use State:addState(\"state\") to add a state") end
 	if self.activeState == nil then error("State:setState(\"state\") not set") end
@@ -34,7 +40,7 @@ function StateManager:load()
 	end
 end
 
---  Events & arguments we want to call.
+--- Events & arguments we want to call.
 ---@param event string
 ---@param ... any
 function StateManager:call(event, ...)

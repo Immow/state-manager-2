@@ -1,7 +1,9 @@
 local Button = {}
 Button.__index = Button
 
-local buttons = {}
+---Button class
+---@param settings {x:integer,y:integer,width:integer,height:integer,text:string,hover:boolean,fn:function}
+---@return table
 function Button.new(settings)
 	local instance  = setmetatable({}, Button)
 	instance.x      = settings.x or 0

@@ -13,6 +13,10 @@ local Buttons = {
 	})
 }
 
+function MainMenu:load()
+	print("MainMenu module loaded")
+end
+
 function MainMenu:mousepressed(mx, my, mouseButton)
 	for _, button in ipairs(Buttons) do
 		button:mousepressed(mx, my, mouseButton)

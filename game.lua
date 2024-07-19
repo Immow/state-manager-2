@@ -12,6 +12,10 @@ local Buttons = {
 	})
 }
 
+function Game:load()
+	print("Game module loaded")
+end
+
 function Game:mousepressed(mx, my, mouseButton)
 	for _, button in ipairs(Buttons) do
 		button:mousepressed(mx, my, mouseButton)

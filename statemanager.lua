@@ -41,7 +41,7 @@ end
 function StateManager:load()
 	if #self.states == 0 then error("No states/modules present, use State:addState(\"state\") to add a state") end
 	if not self.activeState then error("State:setState(\"state\") not set") end
-	for _, state in pairs(self.states) do
+	for _, state in ipairs(self.states) do
 		self.modules[state] = require(state)
 		if self.modules[state].load then
 			self.modules[state]:load()

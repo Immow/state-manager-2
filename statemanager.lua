@@ -39,12 +39,20 @@ end
 
 --- StateManager will require states/modules and call the load function if possible.
 function StateManager:load()
-	if #self.states == 0 then error("No states/modules present, use State:addState(\"state\") to add a state") end
-	if not self.activeState then error("State:setState(\"state\") not set") end
+	if #self.states == 0 then error("No states/modules present. Use StateManager:addState(\"state\") to add a state.") end
+	if not self.activeState then error("StateManager:setState(\"state\") not set.") end
+
 	for _, state in ipairs(self.states) do
-		self.modules[state] = require(state)
-		if self.modules[state].load then
-			self.modules[state]:load()
+		local mod = state:match("([^%.]+)$")    -- Extract module name
+		local success, module = pcall(require, state) -- Attempt to require the state
+
+		if success then
+			self.modules[mod] = module
+			if module.load then
+				module:load()
+			end
+		else
+			error("Failed to load module: " .. state .. ". Error: " .. tostring(module))
 		end
 	end
 end
